@@ -34,7 +34,14 @@ def add_planet():
 @planet_bp.route("", methods=["GET"])
 def get_planets():
     response = []
-    all_planets = Planet.query.all()
+
+    name_query = request.args.get("name")
+
+    if name_query is None:
+        all_planets = Planet.query.all()
+    else: 
+        all_planets = Planet.query.filter_by(name=name_query)
+
     for planet in all_planets:
         response.append(planet.to_dict())
 
@@ -45,7 +52,7 @@ def get_planets():
 def get_one_planet(planet_id):
     planet = validate_planet(planet_id)
 
-    return planet.to_dict(),200
+    return planet.to_dict(), 200
 
 
 @planet_bp.route("/<planet_id>", methods=["PUT"])
