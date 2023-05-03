@@ -29,7 +29,8 @@ def add_planet():
     db.session.add(new_planet)
     db.session.commit()
 
-    return make_response(f"Planet {new_planet.name} successfully created", 201)
+    return {"msge": f"Planet {new_planet.name} successfully created"},201
+
 
 @planet_bp.route("", methods=["GET"])
 def get_planets():
@@ -67,8 +68,7 @@ def update_planet(planet_id):
 
     db.session.commit()
 
-    return make_response(f"Planet {planet_id} was succesfully updated"), 200
-
+    return {"msge": f"Planet {planet_id} was succesfully updated"}, 200
 
 @planet_bp.route("/<planet_id>", methods=["DELETE"])
 def delete_planet(planet_id):
@@ -77,4 +77,4 @@ def delete_planet(planet_id):
     db.session.delete(planet)
     db.session.commit()
 
-    return make_response(f"Planet {planet_id} was deleted"), 200
+    return {"msge": f"Planet {planet_id} was deleted"}, 200
