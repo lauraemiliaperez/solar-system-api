@@ -21,10 +21,17 @@ def test_get_all_planets(client, two_planets):
         }
     ]
 
-def test_get_one_planet()
+def test_get_one_planet():
+    pass
 
 def test_get_non_existing_planet_returns_404(client, two_planets):
-    
+    response = client.get("/planet/3")
+
+    response_body = response.get_json()
+
+    assert response.status_code == 404
+    assert "planet 3 not found" in response_body["message"]
+
 
 
 def test_post_creates_planet(client):
