@@ -30,7 +30,7 @@ def test_get_non_existing_planet_returns_404(client, two_planets):
     response_body = response.get_json()
 
     assert response.status_code == 404
-    assert "planet 3 not found" in response_body["message"]
+    assert "planet 3 not found" in response_body["msg"]
 
 
 
@@ -44,7 +44,7 @@ def test_post_creates_planet(client):
     response_body = response.get_json()
 
     assert response.status_code == 201
-    assert "Earth" in response_body["msge"]
+    assert "Earth" in response_body["msg"]
 
 
 def test_delete_planet(client, two_planets):
@@ -53,7 +53,7 @@ def test_delete_planet(client, two_planets):
     response_body = response.get_json()
 
     assert response.status_code == 200
-    assert "Planet 2 was deleted" in response_body["msge"]
+    assert "Planet 2 was deleted" in response_body["msg"]
 
 def test_put_planet(client, two_planets):
     response = client.put("planet/1", json={
@@ -65,5 +65,5 @@ def test_put_planet(client, two_planets):
     response_body = response.get_json()
 
     assert response.status_code == 200
-    assert "Planet 1 was succesfully updated" in response_body["msge"]
+    assert "Planet 1 was succesfully updated" in response_body["msg"]
 
